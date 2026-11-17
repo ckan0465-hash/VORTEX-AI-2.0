@@ -79,9 +79,10 @@ function runPy(){
 function goWeb(){
  var u=$('url').value.trim();if(!u)return;
  if(!/^https?:\/\//.test(u))u='https://'+u;
- $('fr').src=u;
+ location.href=u;
 }
 function toggleMic(){
+ if(window.Android){$('mic').classList.add('on');$('vstat').textContent='Dinleniyor…';Android.listen();return}
  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR){$('vstat').textContent='Bu cihazda ses tanıma desteklenmiyor.';return}
  if(rec){rec.stop();return}
@@ -97,6 +98,8 @@ function speak(){
  if(!window.speechSynthesis||!t)return;
  var u=new SpeechSynthesisUtterance(t);u.lang='tr-TR';speechSynthesis.speak(u);
 }
+function onVoice(t,d){$('vout').textContent=t;if(d){$('mic').classList.remove('on');$('vstat').textContent='Bitti. Tekrar dokun.'}}
+function onVoiceErr(m){$('mic').classList.remove('on');$('vstat').textContent=m}
 </script>
 </body>
 </html>
