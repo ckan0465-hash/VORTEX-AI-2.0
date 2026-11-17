@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VORTEX AI 2.0</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090d18;color:white;font-family:Arial,sans-serif;padding:22px}
+header{text-align:center;padding:25px 0}
+h1{font-size:32px;color:#36cfff;margin:5px}
+header p{color:#9baac3}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:#151e31;border:1px solid #263c5c;border-radius:16px;padding:22px 10px;text-align:center;color:white;font-size:15px;min-height:110px}
+.card:active{background:#203957}
+.icon{font-size:29px;display:block;margin-bottom:12px}
+#screen{display:none;background:#151e31;border-radius:15px;padding:20px;margin-top:20px}
+button{cursor:pointer}
+.back{background:#36cfff;color:#06101c;border:0;border-radius:9px;padding:12px 20px;font-weight:bold}
+footer{text-align:center;color:#71819b;margin-top:30px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<h1>VORTEX AI 2.0</h1>
+<p>Yapay zekâ kontrol merkezi</p>
+</header>
+<div class="grid" id="modules">
+<button class="card" onclick="openModule('Yapay zekâ sohbeti')"><span class="icon">🤖</span>AI Sohbet</button>
+<button class="card" onclick="openModule('Python IDE')"><span class="icon">🐍</span>Python IDE</button>
+<button class="card" onclick="openModule('Web tarayıcısı')"><span class="icon">🌐</span>Web Tarayıcısı</button>
+<button class="card" onclick="openModule('Dosya yöneticisi')"><span class="icon">📁</span>Dosya Yöneticisi</button>
+<button class="card" onclick="openModule('Sesli asistan')"><span class="icon">🎙️</span>Sesli Asistan</button>
+<button class="card" onclick="openModule('Çevirmen')"><span class="icon">🌍</span>Çevirmen</button>
+<button class="card" onclick="openModule('AI resim oluşturma')"><span class="icon">🖼️</span>AI Resim</button>
+<button class="card" onclick="openModule('AI müzik oluşturma')"><span class="icon">🎵</span>AI Müzik</button>
+<button class="card" onclick="openModule('AI video oluşturma')"><span class="icon">🎬</span>AI Video</button>
+</div>
+<div id="screen">
+<h2 id="title"></h2>
+<p>Bu modülün geliştirme aşaması henüz tamamlanmadı.</p>
+<button class="back" onclick="goBack()">Ana Sayfaya Dön</button>
+</div>
+<footer>VORTEX AI 2.0 · ANDROID</footer>
+<script>
+function openModule(name){
+document.getElementById('modules').style.display='none';
+document.getElementById('screen').style.display='block';
+document.getElementById('title').textContent=name;
+}
+function goBack(){
+document.getElementById('modules').style.display='grid';
+document.getElementById('screen').style.display='none';
+}
+</script>
+</body>
+</html>
