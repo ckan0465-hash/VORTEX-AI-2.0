@@ -14,10 +14,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import java.util.ArrayList;
+import java.util.Locale;
+import android.speech.tts.TextToSpeech;
 
 public class MainActivity extends Activity {
     WebView web;
     SpeechRecognizer sr;
+    TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,13 @@ public class MainActivity extends Activity {
         web.setWebChromeClient(new WebChromeClient());
         web.addJavascriptInterface(new Bridge(), "Android");
         setContentView(web);
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() { public void onInit(int s) { if (s == TextToSpeech.SUCCESS) tts.setLanguage(new Locale("tr", "TR")); } });
         web.loadUrl("file:///android_asset/index.html");
     }
 
     class Bridge {
+        @JavascriptInterface
+        public void speak(final String t) { runOnUiThread(new Runnable() { public void run() { if (tts != null) tts.speak(t, TextToSpeech.QUEUE_FLUSH, null, "v"); } }); }
         @JavascriptInterface
         public void listen() {
             runOnUiThread(new Runnable() {
@@ -102,6 +108,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         if (sr != null) sr.destroy();
+        if (tts != null) tts.shutdown();
         super.onDestroy();
     }
 }

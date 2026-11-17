@@ -95,6 +95,7 @@ function toggleMic(){
 }
 function speak(){
  var t=$('vout').textContent;
+ if(window.Android&&Android.speak){if(t)Android.speak(t);return}
  if(!window.speechSynthesis||!t)return;
  var u=new SpeechSynthesisUtterance(t);u.lang='tr-TR';speechSynthesis.speak(u);
 }
